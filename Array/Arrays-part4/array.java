@@ -1,4 +1,4 @@
-class array{
+class Arrays{
 
     //Longest Consecutive Sequence in an Array
     public int longestConsecutive(int[] nums) {
