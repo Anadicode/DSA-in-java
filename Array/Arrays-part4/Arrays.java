@@ -29,4 +29,34 @@ class Arrays{
 
         return longest;
     }
+
+    //Longest Substring Without Repeating Characters
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character,Integer>mp=new HashMap<>();
+        int max=0;
+
+        int l=0,r=0;
+        while(r<s.length()){
+            if(mp.containsKey(s.charAt(r))){
+                if(l>mp.get(s.charAt(r))){
+                    mp.put(s.charAt(r),r);
+
+                }
+                else{
+                    l=mp.get(s.charAt(r))+1;
+                    mp.put(s.charAt(r),r);
+
+                }
+            }
+            else{
+                mp.put(s.charAt(r),r);
+
+            }
+            max=Math.max(max,(r-l)+1);
+            r++;
+        }
+
+
+        return max;
+    }
 }
