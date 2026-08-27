@@ -63,6 +63,40 @@ class Solution1 {
     }
 }
 
+
+// 78 subset1
+class Solution2 {
+    private void solve(int idx, int [] nums, List<List<Integer>> ans , List<Integer>l){
+        if(idx==nums.length){
+            ans.add(new ArrayList<>(l));
+            return ;
+
+        }
+
+
+        //pick
+        l.add(nums[idx]);
+        solve(idx + 1,nums,ans,l);
+
+        //backtrack
+        l.remove(l.size()-1);
+
+        //not pick
+        solve(idx + 1,nums,ans,l);
+
+
+    }
+    public List<List<Integer>> subsets(int[] nums) {
+        List<Integer> l = new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
+
+        solve(0,nums,ans,l);
+
+        return ans;
+    }
+}
+
+
 public class Main{
 
 }
