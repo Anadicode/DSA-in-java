@@ -96,6 +96,33 @@ class Solution2 {
     }
 }
 
+// 39 combination target sum
+class Solution {
+    private void findCombination(int idx,int[]candidates,int target, List<List<Integer>> ans, List<Integer>l){
+        if(target==0){
+            ans.add(new ArrayList<>(l));
+            return ;
+        }
+
+        if(idx>=candidates.length)return;
+
+        if(candidates[idx]<=target){
+            l.add(candidates[idx]);
+            findCombination(idx,candidates,target-candidates[idx],ans,l);
+            l.remove(l.size() - 1);
+
+        }
+
+        findCombination(idx+1,candidates,target,ans,l);
+
+    }
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> l = new ArrayList<>();
+        findCombination(0,candidates,target,ans,l);
+        return ans;
+    }
+}
 
 public class Main{
 
