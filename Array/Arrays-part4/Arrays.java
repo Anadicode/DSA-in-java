@@ -86,5 +86,39 @@ class Arrays{
         }
 
 
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head = null;
+        ListNode temp = head;
+
+        Stack<Integer> s1 = new Stack<>();
+        Stack<Integer> s2 = new Stack<>();
+        int carry = 0;
+
+        while(l1!=null){
+            s1.push(l1.val);
+            l1=l1.next;
+        }
+
+        while(l2!=null){
+            s2.push(l2.val);
+            l2=l2.next;
+        }
+
+        while(!s1.isEmpty() || !s2.isEmpty() || carry!=0){
+            int n1 = (!s1.isEmpty())? s1.pop() : 0;
+            int n2 = (!s2.isEmpty())? s2.pop() : 0;
+
+            int sum = n1+n2+carry;
+            int rem = sum % 10;
+            carry = sum/10;
+            temp = new ListNode(rem);
+            temp.next = head;
+            head=temp;
+
+        }
+
+        return head;
+    }
+
 
 }
