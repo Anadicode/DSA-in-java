@@ -120,5 +120,52 @@ class Arrays{
         return head;
     }
 
+    //402 remove kth digit
+
+    public String removeKdigits(String num, int k) {
+
+        if(num.length()== k)return "0";
+
+        Stack<Character> st = new Stack<>();
+
+
+        for(int i=0;i<num.length();i++){
+
+            while(k>0 && !st.isEmpty() && st.peek()>num.charAt(i)){
+                st.pop();
+                k--;
+            }
+
+            st.push(num.charAt(i));
+
+
+        }
+
+        while(k>0){
+            st.pop();
+            k--;
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        for (char c : st) {
+            sb.append(c);
+        }
+
+        // Remove leading zeros
+        int i = 0;
+
+        while (i < sb.length() && sb.charAt(i) == '0') {
+            i++;
+        }
+
+        if (i == sb.length()) {
+            return "0";
+        }
+
+        return sb.substring(i);
+
+
+    }
 
 }
