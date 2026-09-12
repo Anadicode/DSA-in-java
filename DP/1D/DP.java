@@ -30,4 +30,50 @@ class DP{
             return Math.min(cost(i-1,Cost,dp),cost(i-2,Cost,dp));
         }
     }
+
+    //213. House Robber II
+    class Solution {
+        public long solve(List<Integer> arr) {
+            int n = arr.size();
+
+            // If there's only one house, return its value
+            if (n == 1) return arr.get(0);
+
+            // prev stores the maximum sum till the previous index
+            long prev = arr.get(0);
+
+            // prev2 stores the maximum sum till index before previous
+            long prev2 = 0;
+
+            // Iterate from the second house
+            for (int i = 1; i < n; i++) {
+                // Pick the current house and add value from prev2
+                long pick = arr.get(i);
+                if (i > 1) pick += prev2;
+
+                // Skip the current house
+                long nonPick = prev;
+
+                // Choose maximum
+                long cur_i = Math.max(pick, nonPick);
+
+                // Update prev2 and prev
+                prev2 = prev;
+                prev = cur_i;
+            }
+            return prev;
+        }
+        public int rob(int[] nums) {
+            if (nums.length == 0) return 0;
+            if (nums.length == 1) return nums[0];
+            List<Integer>l1=new ArrayList<>();
+            List<Integer>l2=new ArrayList<>();
+
+            for(int i=0;i<nums.length;i++){
+                if(i!=0) l1.add(nums[i]);
+                if(i!=nums.length-1) l2.add(nums[i]);
+            }
+            return (int)Math.max(solve(l1),solve(l2));
+        }
+    }
 }
