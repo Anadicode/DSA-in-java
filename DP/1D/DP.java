@@ -1,6 +1,8 @@
 class DP{
+
+
   //  70. Climbing Stairs
-    class Solution {
+    class Solution1 {
         private Map<Integer,Integer>mp = new HashMap<>();
 
         public int climbStairs(int n) {
@@ -12,7 +14,7 @@ class DP{
         }
     }
 // 746 min cost to climb a stair
-    class Solution {
+    class Solution2 {
 
         private int cost(int i, int []Cost,int []dp){
             if(i<0)return 0;
@@ -32,7 +34,7 @@ class DP{
     }
 
     //213. House Robber II
-    class Solution {
+    class Solution3 {
         public long solve(List<Integer> arr) {
             int n = arr.size();
 
@@ -76,4 +78,7 @@ class DP{
             return (int)Math.max(solve(l1),solve(l2));
         }
     }
+
+
+
 }
