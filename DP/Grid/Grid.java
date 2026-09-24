@@ -55,4 +55,45 @@ public class Grid{
             return path(0,0,m,n,arr,obstacleGrid);
         }
     }
+
+    //931. Minimum Falling Path Sum
+    class Solution3 {
+
+
+        private int pathSum(int m,int n,int i,int j, int [][]arr,int [][]matrix){
+            if(i>=m)return 1000000000;
+            if(j<0 || j>=n)return 1000000000;
+
+            if(i==m-1){
+                return matrix[i][j];
+            }
+
+            if(arr[i][j]!=Integer.MAX_VALUE)return arr[i][j];
+
+            int d =  pathSum( m,n,i+1,j,arr,matrix);
+            int leftDown =  pathSum( m,n,i+1,j-1,arr,matrix);
+            int rightDown =  pathSum( m,n,i+1,j+1,arr,matrix);
+
+            return arr[i][j] = matrix[i][j] + Math.min(d,Math.min(leftDown,rightDown));
+        }
+
+
+
+        public int minFallingPathSum(int[][] matrix) {
+            int minSum=Integer.MAX_VALUE;
+            int n=matrix.length;
+
+            int [][]arr = new int[n][n];
+            for(int i=0;i<n;i++){
+                Arrays.fill(arr[i],Integer.MAX_VALUE);
+            }
+            for(int j=0;j<n;j++){
+                int min = pathSum(n,n,0,j,arr,matrix);
+                minSum=Math.min(minSum,min);
+            }
+
+            return minSum;
+        }
+    }
+
 }
