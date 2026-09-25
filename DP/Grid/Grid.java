@@ -96,4 +96,29 @@ public class Grid{
         }
     }
 
+    //120. Triangle
+    class Solution4 {
+        private int pathSum(List<List<Integer>> triangle,int i,int j,int [][]arr){
+            if(i==triangle.size()-1){
+                return triangle.get(i).get(j);
+            }
+
+            if(arr[i][j]!=Integer.MAX_VALUE)return arr[i][j];
+
+            int left = pathSum(triangle,i+1,j,arr);
+            int right = pathSum(triangle,i+1,j+1,arr);
+
+            return arr[i][j]=triangle.get(i).get(j) + Math.min(left,right);
+        }
+        public int minimumTotal(List<List<Integer>> triangle) {
+            int n=triangle.size();
+            int [][]arr = new int[n][n];
+            for(int i=0;i<n;i++){
+                Arrays.fill(arr[i],Integer.MAX_VALUE);
+            }
+            return pathSum(triangle,0,0,arr);
+        }
+    }
+
+
 }
