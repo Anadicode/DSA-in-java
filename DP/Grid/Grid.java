@@ -120,5 +120,47 @@ public class Grid{
         }
     }
 
+   ///2684. Maximum Number of Moves in a Grid
+    class Solution4 {
+        private int maxMove(int [][]grid,int row,int col,int m,int n,int [][]dp){
+            if(row<0 || row>=m)return 0;
+            if(col>=n-1)return 0;
+
+            int du=0;
+            int s=0;
+            int dd=0;
+            if(dp[row][col]!=-1)return dp[row][col];
+
+            if(row>0 && grid[row-1][col+1]> grid[row][col]){
+                du = 1+maxMove(grid,row-1,col+1,m,n,dp);
+            }
+            if(col<n && grid[row][col+1]> grid[row][col]){
+                s = 1+maxMove(grid,row,col+1,m,n,dp);
+            }
+            if(row<m-1 && grid[row+1][col+1]> grid[row][col]){
+                dd = 1+maxMove(grid,row+1,col+1,m,n,dp);
+            }
+
+            return dp[row][col]=Math.max(du,Math.max(s,dd));
+
+        }
+        public int maxMoves(int[][] grid) {
+            int m = grid.length;
+            int n = grid[0].length;
+            int max=0;
+            int [][]dp=new int[m][n];
+
+            for(int i=0;i<m;i++){
+                Arrays.fill(dp[i],-1);
+            }
+
+            for(int i=0;i<m;i++){
+                max = Math.max(max,maxMove(grid,i,0,m,n,dp));
+            }
+
+            return max;
+        }
+    }
+
 
 }
