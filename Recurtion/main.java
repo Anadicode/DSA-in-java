@@ -124,6 +124,23 @@ class Solution {
     }
 }
 
+//22. Generate Parentheses
+class Solution {
+    private void ganarate(String res, int open,int close,int n ,List<String> l ){
+        if(res.length()==2*n){
+            l.add(res);
+            return ;
+        }
+        if(open<n)ganarate( res+"(", open+1, close, n ,l );
+        if(close<open)ganarate( res+")", open, close+1, n ,l );
+    }
+    public List<String> generateParenthesis(int n) {
+        List<String> l = new ArrayList<>();
+        ganarate( "", 0, 0, n ,l );
+        return l;
+    }
+}
+
 public class Main{
 
 }
