@@ -24,4 +24,69 @@ class Slide{
             return maxSum;
         }
     }
+
+    //1004. Max Consecutive Ones III
+    class Solution1 {
+        public int longestOnes(int[] arr, int k) {
+
+            if(arr.length==k)return k;
+
+            int max = 0;
+            int countZeros = 0;
+
+            int l=0,r=0;
+            while(r<arr.length){
+
+                if(arr[r]==0 )countZeros++;
+                if(countZeros>k){
+                    if(arr[l]==0 ){
+                        countZeros--;
+                    }
+                    l++;
+                }
+
+                if((r-l+1)>max )max=(r-l+1);
+
+
+                r++;
+            }
+
+            return max;
+
+        }
+    }
+
+    //904. Fruit Into Baskets
+    class Solution2 {
+        public int totalFruit(int[] fruits) {
+            Map<Integer,Integer> mp = new HashMap<>();
+            int l=0,r=0;
+            int max=0;
+
+            while(r<fruits.length){
+
+
+                if(mp.containsKey(fruits[r])){
+                    mp.put(fruits[r],mp.getOrDefault(fruits[r], 0) + 1);
+                }
+                else if(!mp.containsKey(fruits[r])){
+                    mp.put(fruits[r],1);
+                }
+
+
+                if(mp.size()>2){
+                    mp.put(fruits[l],mp.getOrDefault(fruits[l], 0) - 1);
+                    if(mp.get(fruits[l])<=0)mp.remove(fruits[l]);
+                    l++;
+                }
+
+                max=Math.max(max,r-l+1);
+                r++;
+
+
+            }
+            return max;
+        }
+    }
+
 }
