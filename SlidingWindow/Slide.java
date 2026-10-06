@@ -89,4 +89,29 @@ class Slide{
         }
     }
 
+    //2401. Longest Nice Subarray
+    class Solution3 {
+        public int longestNiceSubarray(int[] nums) {
+            int max = 1;
+            int used=0;
+            int l=0,r=0;
+
+            while(r<nums.length){
+
+                if((used & nums[r]) != 0){
+                    used^=nums[l];
+                    l++;
+                    continue;
+                }
+
+                used|=nums[r];
+                max=Math.max(max,r-l+1);
+                r++;
+
+            }
+
+            return max;
+        }
+    }
+
 }
