@@ -1,6 +1,6 @@
 package SlidingWindow;
 
-class Pattern2{
+public class Pattern2{
     class Solution {
 
         //1423. Maximum Points You Can Obtain from Cards
@@ -110,6 +110,35 @@ class Pattern2{
                 max=Math.max(max,r-l+1);
                 r++;
 
+            }
+
+            return max;
+        }
+    }
+
+
+    //1839. Longest Substring Of All Vowels in Order
+    class Solution4 {
+        public int longestBeautifulSubstring(String s) {
+            if(s.length()==1)return 0;
+            int max = 0;
+            int prev=0,r=0,l=0;
+            int count=1;
+            while(r<s.length()){
+                if(s.charAt(r)<s.charAt(prev)){
+                    l++;
+                    count=1;
+                    if(l==r)prev=r;
+                    continue;
+                }
+                else if(s.charAt(r)>s.charAt(prev)){
+                    count++;
+                }
+                prev=r;
+                if(count>=5){
+                    max=Math.max(max,r-l+1);
+                }
+                r++;
             }
 
             return max;
