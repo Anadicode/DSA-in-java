@@ -145,4 +145,33 @@ public class Pattern2{
         }
     }
 
+    //424. Longest Repeating Character Replacement
+    class Solution5 {
+        // len-maxFrquency<=k
+        public int characterReplacement(String s, int k) {
+            int max=0;
+            int maxFrequency=0;
+
+            int r=0,l=0;
+
+            Map <Character,Integer> mp = new HashMap<>();
+
+            while(r<s.length()){
+                mp.put(s.charAt(r),mp.getOrDefault(s.charAt(r),0)+1);
+
+                if((r-l+1) - Collections.max(mp.values()) >k){
+                    mp.put(s.charAt(l),mp.getOrDefault(s.charAt(l),0)-1);
+                    l++;
+
+                }
+
+                max=Math.max(max,(r-l+1));
+                r++;
+
+            }
+
+            return max;
+        }
+    }
+
 }
