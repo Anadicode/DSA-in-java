@@ -43,4 +43,37 @@ public class BSonAns {
             return low;
         }
     }
+
+   //875. Koko Eating Bananas
+    class Solution2 {
+        public int minEatingSpeed(int[] piles, int h) {
+
+            int low=1,high=1;
+
+            // finding the max range
+            for(int e:piles){
+                high=Math.max(high,e);
+            }
+
+            int ans=0;
+            while(low<=high){
+                int mid = low+(high-low)/2;
+
+                // calculating total hours if koko eats 'mid no. of bananas'/hour
+                long totalSum=0;
+                for(int e:piles){
+                    // (e+mid-1)/mid;  calculating ceil value
+                    totalSum+=(e+mid-1L)/mid;
+                }
+
+                if(totalSum<=h){
+                    high=mid-1;
+                }
+                else
+                    low=mid+1;
+            }
+
+            return low;
+        }
+    }
 }
