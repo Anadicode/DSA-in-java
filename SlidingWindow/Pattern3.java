@@ -99,4 +99,56 @@ public class Pattern3 {
         }
     }
 
+    //1482. Minimum Number of Days to Make m Bouquets
+    class Solution3 {
+        private boolean possible(int [] arr, int day, int m, int k){
+
+            int count=0, noOfB=0;
+
+            for(int i=0;i<arr.length;i++){
+                if(arr[i]<=day){
+                    count++;
+                }else{
+                    noOfB+=(count/k);
+                    count=0;
+                }
+            }
+            noOfB+=(count/k);
+
+            return  noOfB>=m;
+        }
+
+
+        public int minDays(int[] bloomDay, int m, int k) {
+            if((long)m*k>bloomDay.length)return -1;
+
+            // finding range
+            int min = bloomDay[0],max = bloomDay[0];
+
+            for(var e: bloomDay){
+                min = Math.min(e,min);
+                max = Math.max(e,max);
+            }
+
+            // fining the minimum day
+
+            int minDay = max;
+
+            while(min<=max){
+                int mid = min+(max-min)/2;
+
+                if(!possible(bloomDay,mid,m,k)){
+                    min=mid+1;
+                }
+                else{
+                    max=mid-1;
+                    minDay=mid;
+                }
+
+            }
+
+            return minDay;
+        }
+    }
+
 }
