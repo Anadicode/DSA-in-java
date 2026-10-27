@@ -2,6 +2,47 @@ package BinarySearch;
 
 public class BSonAns {
 
+
+    class Solution0 {
+
+        // finding the ceil value sum
+        private long ceilValueSum(int []nums , int divisor){
+            long sum = 0;
+
+            for(var e:nums){
+                // calculaating  the ceil value
+                sum+= (e+divisor - 1L)/divisor;
+            }
+
+            return sum;
+        }
+
+
+        public int smallestDivisor(int[] nums, int threshold) {
+
+            int min = 1;
+            int max = nums[0];
+
+            // finding max range
+            for(var e:nums){
+                max = Math.max(max,e);
+            }
+
+
+            while(min<=max){
+                int mid = min + (max-min)/2;
+
+                if(ceilValueSum(nums ,mid)>threshold) min = mid+1;
+                else
+                    max = mid-1;
+
+            }
+
+            return min;
+        }
+    }
+
+
     //1011. Capacity To Ship Packages Within D Days
     class Solution1 {
         public int shipWithinDays(int[] weights, int days) {
