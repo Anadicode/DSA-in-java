@@ -188,4 +188,48 @@ public class BSonAns {
         }
     }
 
+    //410. Split Array Largest Sum
+    class Solution5 {
+
+        boolean allocation(int []arr, int k,int limit){
+            int count=1;
+            int sum = 0;
+
+            for(int i=0;i<arr.length;i++){
+
+                if(arr[i]>limit)return false;
+
+                sum+=arr[i];
+                if(sum >limit){
+                    sum=arr[i];
+                    count++;
+                }
+            }
+
+            return count<=k;
+        }
+
+        public int splitArray(int[] arr, int k) {
+
+            int low=arr[0],high=0;
+            for(var e:arr){
+                low = Math.min(low,e);
+                high+=e;
+            }
+
+            while(low<=high){
+                int mid = low + (high-low)/2;
+
+                if(allocation(arr,k,mid)){
+                    high=mid-1;
+                }else{
+                    low=mid+1;
+                }
+            }
+
+            return low;
+        }
+    }
+
+
 }
